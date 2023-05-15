@@ -169,6 +169,17 @@ pub trait KeyInit: KeySizeUser + Sized {
     }
 }
 
+/// Types which can be initialized from a key and customization string, each of arbitrary length
+pub trait KeyCustomInit: Sized {
+    /// Create new value from an arbitrary-length key and empty customization string
+    fn new_from_slice(key: &[u8]) -> Self {
+        Self::new_with_customization(key, &[])
+    }
+
+    /// Create new value from a key and customization string, each of arbitrary length
+    fn new_with_customization(key: &[u8], customization: &[u8]) -> Self;
+}
+
 /// Types which can be initialized from key and initialization vector (nonce).
 pub trait KeyIvInit: KeySizeUser + IvSizeUser + Sized {
     /// Create new value from fixed length key and nonce.
