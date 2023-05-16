@@ -55,6 +55,8 @@ pub mod core_api;
 mod digest;
 #[cfg(feature = "mac")]
 mod mac;
+#[cfg(feature = "mac")]
+mod mac_xof;
 
 #[cfg(feature = "core-api")]
 #[cfg_attr(docsrs, doc(cfg(feature = "core-api")))]
@@ -70,6 +72,8 @@ pub use crypto_common::{generic_array, typenum, typenum::consts, Output, OutputS
 pub use crypto_common::{InnerInit, InvalidLength, Key, KeyInit, KeyCustomInit};
 #[cfg(feature = "mac")]
 pub use mac::{CtOutput, Mac, MacError, MacMarker};
+#[cfg(feature = "mac")]
+pub use mac_xof::MacXof;
 
 use core::fmt;
 
