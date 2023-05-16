@@ -16,3 +16,7 @@ exclude = [
     "crypto",
     "elliptic-curve"
 ]
+
+[patch.crates-io.crypto-common]
+git = "https://github.com/ok-ryoko/RustCrypto-traits"
+branch = "crypto-common-keycustominit"

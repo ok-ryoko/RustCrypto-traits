@@ -7,7 +7,7 @@ use crate::{
 };
 use block_buffer::BlockBuffer;
 use core::fmt;
-use crypto_common::{BlockSizeUser, InvalidLength, Key, KeyInit, KeySizeUser, Output};
+use crypto_common::{BlockSizeUser, InvalidLength, Key, KeyInit, KeyCustomInit, KeySizeUser, Output};
 
 #[cfg(feature = "mac")]
 use crate::MacMarker;
@@ -84,6 +84,19 @@ where
             core: T::new_from_slice(key)?,
             buffer: Default::default(),
         })
+    }
+}
+
+impl<T> KeyCustomInit for CoreWrapper<T>
+where
+    T: BufferKindUser + KeyCustomInit,
+{
+    #[inline]
+    fn new_with_customization(key: &[u8], customization: &[u8]) -> Self {
+        Self {
+            core: T::new_with_customization(key, customization),
+            buffer: Default::default(),
+        }
     }
 }
 
